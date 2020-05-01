@@ -1,6 +1,5 @@
 - Trigger : 
 ```SQL
-
 DROP TRIGGER after_accounts_update;
 
 DELIMITER // 
