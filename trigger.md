@@ -169,13 +169,37 @@ AFTER UPDATE
 ON products FOR EACH ROW
 
 BEGIN
-	INSERT INTO commander_articles (codart, qte, date_du_jour)VALUES (OLD.pro_id, NEW.pro_stock, NOW());
+	INSERT INTO commander_articles (codart, qte, date_du_jour)
+		VALUES (OLD.pro_id, NEW.pro_stock, NOW());
 END $$
  
 DELIMITER ;
 
 ```
 - avec une condition
+```SQL
+DELIMITER $$
+
+CREATE TRIGGER after_products_update
+AFTER UPDATE 
+ON products FOR EACH ROW
+
+BEGIN
+  IF (NEW.pro_stock <= 5) THEN
+    INSERT INTO commander_articles (codart, qte, date_du_jour) 
+      VALUES (OLD.pro_id, NEW.pro_stock, NOW());
+  END IF;
+END $$
+ 
+DELIMITER ;
+
+```
+
+## Probleme rencontré : 
+```
+probleme: Je souhaiter modifier une colonne spécifique, et non une autre colonne. Le trigger ce déclenche aussi quand je met a jour n'importe quel colonne. puis insert dans la table commander_articles.
+```
+
 ```SQL
 DELIMITER $$
 
