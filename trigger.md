@@ -13,7 +13,8 @@ BEGIN
 DECLARE diff INT;
 	SET diff = abs(NEW.balance - OLD.balance);
 	IF(diff > 1000) THEN
-		INSERT INTO logs (account_id, old_sum, new_sum) values (OLD.id, OLD.balance, NEW.balance);
+		INSERT INTO logs (account_id, old_sum, new_sum)
+			values (OLD.id, OLD.balance, NEW.balance);
 	END IF;
 END 
 DELIMITER
@@ -41,7 +42,8 @@ BEGIN
 					WHERE OLD.id = acc.id);
 				
 	-- insertion du first-name
-	INSERT INTO logs (account_id, old_sum, new_sum, first_name, date_transaction) values (OLD.id, OLD.balance, NEW.balance, f_name, NOW());
+	INSERT INTO logs (account_id, old_sum, new_sum, first_name, date_transaction) 
+		values (OLD.id, OLD.balance, NEW.balance, f_name, NOW());
 
 END //
 DELIMITER;
@@ -109,3 +111,51 @@ JOIN account_holder as ah
 ON acc.account_holder_id = ah.id
 WHERE accounts.first_name = 'SUSANNE' and accounts.last_name = 'CANE';
  ```
+
+
+- trigger learn 2020 : 
+```SQL
+
+DELIMITER $$
+
+CREATE TRIGGER after_products_update
+AFTER UPDATE 
+ON products FOR EACH ROW
+	DECLARE fname VARCHAR(20);
+BEGIN
+
+
+    select EXISTS (SELECT prod_id, pro_stock, pro_stock_alert FROM products WHERE pro_stock = NEW.pro_stock)
+	
+	IF pro_stock >= 5 THEN
+	SET pro_stock = NEW.pro_stock
+		INSERT INTO commander_articles (codart, qte, date_du_jour)
+			values (fname, NEW.pro_stock, NOW())
+ 	END IF;
+END $$ 
+
+DELIMITER;
+
+```
+// sauvegarde
+```sql
+DELIMITER $$
+
+CREATE TRIGGER after_products_update
+AFTER UPDATE 
+ON products FOR EACH ROW
+
+
+
+BEGIN
+DECLARE f_name VARCHAR(20);
+   SET f_name = (SELECT prod_id, pro_stock, pro_stock_alert FROM products);
+    IF NEW.pro_stock < 5 THEN
+        INSERT INTO commander_articles (codart, qte, date_du_jour)VALUES (f_name, NEW.pro_stock, NOW());
+    END IF;
+END $$
+ 
+DELIMITER ;
+
+```
+// new version
