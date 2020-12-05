@@ -158,4 +158,37 @@ END $$
 DELIMITER ;
 
 ```
-// new version
+## News Version : 
+- fonctionne sans la condition
+```sql
+DELIMITER $$
+
+CREATE TRIGGER after_products_update
+AFTER UPDATE 
+ON products FOR EACH ROW
+
+BEGIN
+	INSERT INTO commander_articles (codart, qte, date_du_jour)VALUES (OLD.pro_id, NEW.pro_stock, NOW());
+END $$
+ 
+DELIMITER ;
+
+```
+- avec une condition
+```sql
+DELIMITER $$
+
+CREATE TRIGGER after_products_update
+AFTER UPDATE 
+ON products FOR EACH ROW
+
+BEGIN
+	IF (NEW.pro_stock <= 5) THEN
+        INSERT INTO commander_articles (codart, qte, date_du_jour) 
+			VALUES (OLD.pro_id, NEW.pro_stock, NOW());
+  END IF;
+END $$
+ 
+DELIMITER ;
+
+```
