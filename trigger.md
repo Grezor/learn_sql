@@ -196,7 +196,7 @@ DELIMITER ;
 ```
 
 ## Probleme rencontré : 
-```markdown
+```{r, class.output="scroll-100"}
 probleme: Je souhaiter modifier une colonne spécifique, et non une autre colonne. Le trigger ce déclenche aussi quand je met a jour n'importe quel colonne. puis insert dans la table commander_articles.
 ```
 
