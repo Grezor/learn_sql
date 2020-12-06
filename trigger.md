@@ -200,7 +200,7 @@ DELIMITER ;
 <p>
 
 #### explication
-Je souhaitais modifier une colonne spécifique, et non une autre colonne. Le trigger ce déclenche aussi quand je mets à jour n'importe quelle colonne dans la table. Puis le trigger ce déclenche, insert dans la table commander_articles.
+Je souhaitais modifier une colonne spécifique, et non une autre colonne. Le trigger se déclenche aussi quand je mets à jour n'importe quelles colonnes dans la table. Puis le trigger ce déclenche, insert dans la table commander_articles.
 </p>
 </details>
 
