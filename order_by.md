@@ -1,2 +1,0 @@
-La table order by permet de définir un ordre d'affichage
-
