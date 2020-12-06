@@ -1,6 +1,0 @@
-## Cours SQL:
-
-## Présentation : 
-
-## table : 
-
