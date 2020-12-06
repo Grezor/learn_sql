@@ -197,8 +197,7 @@ DELIMITER ;
 
 ## Probleme rencontré : 
 ```markdown
-probleme: Je souhaiter modifier une colonne spécifique, et non une autre colonne. Le trigger ce déclenche aussi quand je
- met a jour n'importe quel colonne. puis insert dans la table commander_articles.
+probleme: Je souhaiter modifier une colonne spécifique, et non une autre colonne. Le trigger ce déclenche aussi quand je met a jour n'importe quel colonne. puis insert dans la table commander_articles.
 ```
 
 ```SQL
