@@ -78,7 +78,10 @@ ROUND(SUM((ode_unit_price*ode_quantity))+SUM((ode_unit_price/100*20))-ode_unit_p
 
 -- 187.308 sans remise
 SELECT ROUND(SUM(ode_unit_price/100*20),1) AS 'TVA', SUM(ode_unit_price/100*ode_discount) AS 'Remise', 
-ROUND(SUM((ode_unit_price*ode_quantity + ode_unit_price/100*ode_discount) )+SUM((ode_unit_price/100*20))-ode_unit_price/100*ode_discount,2) AS 'PTTC' FROM orders_details WHERE ode_ord_id = 54 GROUP BY ode_ord_id
+ROUND(SUM((ode_unit_price*ode_quantity + ode_unit_price/100*ode_discount) )+SUM((ode_unit_price/100*20))-ode_unit_price/100*ode_discount,2) AS 'PTTC' FROM orders_details WHERE ode_ord_id = 54 GROUP BY ode_ord_id;
+--requête terminer pour afficher PTTT,remise,Montant TVA
+SUM(ode_unit_price-ode_unit_price*ode_discount/100)*20/100, SUM(ode_unit_price/100*ode_discount) AS 'Remise', 
+ROUND(SUM((ode_unit_price*ode_quantity + ode_unit_price/100*ode_discount) )+SUM((ode_unit_price/100*20))-ode_unit_price/100*ode_discount,2) AS 'PTTC' FROM orders_details WHERE ode_ord_id = 54 GROUP BY ode_ord_id;
 END $$
 DELIMITER ;
 -- pour que la functions s'execute
